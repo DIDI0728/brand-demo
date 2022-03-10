@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueDemo</title>
+</head>
+<body>
+
+<div id="div">
+
+    username:<input name="username" v-model="username"> {{username}}
+    <br>
+
+    <a v-bind:href="url">点击一下！</a>
+    <input v-model="url">
+    <hr>
+
+
+    <input type="button" v-on:click="fun()" value="按钮">
+
+    <div v-if="num==3">div1</div>
+    <div v-else-if=" num==4">div2</div>
+    <div v-else>div3</div>
+    <br>
+    <input v-model="num">
+
+    <br>
+    <div v-show="num==4">div v-show</div>
+
+
+    <div v-for="(city,i) in citys">
+        {{i+1}}---> {{city}}
+    </div>
+
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#div",
+        data(){
+            return{
+                username:"赵应朗",
+                url:"https://baidu.com",
+                num:4,
+                citys:["北京","上海","广州"],
+
+
+            }
+        },
+
+        methods:{
+            fun(){
+                alert("btn被点击了！");
+            },
+
+
+        },
+
+
+
+    })
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加品牌</title>
+</head>
+<body>
+
+<form action="" name="brand">
+
+   <label>品牌名称</label> <input id="brandname" name="brandname"><br>
+    <label>企业名称</label> <input  id="companyname" name="companyname"><br>
+    <label>排序</label> <input id="ordered" name="ordered"><br>
+    <label>描述</label> <textarea id="description" cols="20" rows="5" name="description"  ></textarea><br>
+    <label>状态</label> <input type="radio" name="status" value="1">  启用
+                        <input type="radio" name="status" value="0">  禁用<br>
+
+    <input type="button" id="btn" value="提交"><br>
+
+</form>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script>
+    var formData={
+        brand_name:"",
+        company_name:"",
+        ordered:"",
+        description:"",
+        status:"",
+    };
+
+
+    document.getElementById("btn").onclick=function () {
+        formData.brand_name=document.getElementById("brandname").value;
+        formData.company_name=document.getElementById("companyname").value;
+        formData.description=document.getElementById("description").value;
+        formData.ordered=document.getElementById("ordered").value;
+
+        var status=document.getElementsByName("status");
+        for (let i = 0; i < status.length; i++) {
+            if(status[i].checked){
+                formData.status=status[i].value;
+            }
+
+        }
+
+        axios.post("http://localhost/brand_demo/AddServlet",formData).then(function (resp) {
+            if(resp.data=="success"){
+                location.href="http://localhost/brand_demo/Brands.html";
+            }
+        })
+
+    }
+
+</script>
+
+
+</body>
+</html>

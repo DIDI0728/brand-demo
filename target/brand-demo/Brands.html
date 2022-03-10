@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌数据</title>
+</head>
+<body>
+<input type="button" value="新增" id="add">
+
+<table  id="brandTable" border="1" cellspacing="0" width="80%">
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script>
+
+        let table_header = " <tr>\n" +
+            "        <th>序号</th>\n" +
+            "        <th>品牌</th>\n" +
+            "        <th>企业名称</th>\n" +
+            "        <th>排序</th>\n" +
+            "        <th>品牌介绍</th>\n" +
+            "        <th>状态</th>\n" +
+            "        <th>操作</th>\n" +
+            "\n" +
+            "    </tr>";
+
+
+        window.onload=function () {
+          axios.get("http://localhost/brand_demo/SelectAllServlet").then(function (resp) {
+              let brands = resp.data;
+              for (let i = 0; i < brands.length; i++) {
+                  let brand = brands[i];
+                  table_header+="   <tr>\n" +
+                      "\n" +
+                      "        <td>"+(i+1)+"</td>\n" +
+                      "        <td>"+brand.brand_name+"</td>\n" +
+                      "        <td>"+brand.company_name+"</td>\n" +
+                      "        <td>"+brand.ordered+"</td>\n" +
+                      "        <td>"+brand.description+"</td>\n" +
+                      "        <td>"+brand.status+"</td>\n"+
+                      "        <td>"+"<a href=\"/brand_demo/SelectByIdServlet?id="+brand.id+"\" >修改</a>"+ "   <a href=\"/brand_demo/DeleteServlet?id="+brand.id+"\" >删除</a>"+" </td>\n"+
+                      "    </tr>\n" +
+                      "\n";
+              }
+              document.getElementById("brandTable").innerHTML=table_header;
+          })
+
+
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+<!--    <c:forEach items="${brands}" var="brand" varStatus="status">-->
+<!--        <tr>-->
+
+<!--            <td>${status.count}</td>-->
+<!--            <td>${brand.brand_name}</td>-->
+<!--            <td>${brand.company_name}</td>-->
+<!--            <td>${brand.ordered}</td>-->
+<!--            <td>${brand.description}</td>-->
+<!--            <c:if test="${brand.status==1}">-->
+<!--                <td>启用</td>-->
+<!--            </c:if>-->
+<!--            <c:if test="${brand.status!=1}">-->
+<!--                <td>禁用</td>-->
+<!--            </c:if>-->
+
+<!--            <td><a href="/brand_demo/SelectByIdServlet?id=${brand.id}" >修改</a>   <a href="/brand_demo/DeleteServlet?id=${brand.id}" >删除</a></td>-->
+<!--        </tr>-->
+
+
+<!--    </c:forEach>-->
+
+
+</table>
+
+
+<script>
+    document.getElementById("add").onclick=function (){
+        location.href="AddBrand.html";
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script>
+    var username="zhangsan";
+    // axios({
+    //     method:"get",
+    //     url:"http://localhost/brand_demo/AxioServlet?username="+username
+    // }).then(function (resp) {
+    //     alert(resp.data);
+    // })
+
+    // axios({
+    //     method:"post",
+    //     url:"http://localhost/brand_demo/AxioServlet",
+    //     data:"username=赵应朗"
+    //
+    // }).then(function (resp) {
+    //
+    //     alert(resp.data)
+    //
+    // })
+
+    axios.get("http://localhost/brand_demo/AxioServlet?username="+username).then(function (resp) {
+
+        alert(resp.data);
+
+    })
+
+    axios.post("http://localhost/brand_demo/AxioServlet","username=zhangsan").then(function (resp) {
+        alert(resp.data);
+    })
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

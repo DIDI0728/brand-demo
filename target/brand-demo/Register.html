@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html  lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>注册页面</title>
+</head>
+
+<body>
+
+<style>
+  span{
+    color: red;
+  }
+
+
+</style>
+
+<div align="middle" >
+  <form action="/brand_demo/AjaxServlet" method="post" >
+
+
+    <label>
+      username<br>
+      <input id="username" name="username" ><br>
+      <span id="username_msg" style="display:none">用户已存在！</span>
+    </label><br>
+    <label>
+      password<br>
+      <input name="password"><br>
+    </label><br>
+
+    <input type="submit" value="创建"><br>
+
+  </form>
+
+</div>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+<script>
+
+  document.getElementById("username").onblur=function () {
+    var username=this.value;
+    axios.post("http://localhost/brand_demo/AjaxServlet","username="+username).then(function (resp) {
+
+      if(resp.data==true)
+        document.getElementById("username_msg").style.display=""
+
+      if(resp.data==false)
+        document.getElementById("username_msg").style.display="none"
+
+
+    })
+
+  }
+
+  // document.getElementById("username").onblur=function (){
+  //   var username =this.value;
+  //
+  //   var xhttp;
+  //   if (window.XMLHttpRequest) {
+  //     xhttp = new XMLHttpRequest();
+  //   } else {
+  //     // code for IE6, IE5
+  //     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  //   }
+  //
+  //   xhttp.open("GET", "http://localhost/brand_demo/AjaxServlet?username="+username, true);
+  //   xhttp.send();
+  //
+  //   xhttp.onreadystatechange = function() {
+  //     if (this.readyState == 4 && this.status == 200) {
+  //       if(xhttp.responseText=="true"){
+  //         //用户名存在
+  //         document.getElementById("username_msg").style.display="";
+  //       }else {
+  //         //用户名不存在
+  //         document.getElementById("username_msg").style.display="none";
+  //       }
+  //     }
+  //   };
+  // }
+
+
+</script>
+
+
+</body>
+</html>
